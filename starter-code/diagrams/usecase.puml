@@ -1,0 +1,29 @@
+@startuml
+left to right direction
+actor User as "Accountant"
+
+rectangle "Invoicing App" {
+  
+  (Create Invoice)
+  (Edit Invoice)
+  (Delete Invoice)
+  (View & Filter Invoice List)
+  (View Invoice Details)
+  (Save as Draft)
+  (Save as Pending)
+  (Mark Pending Invoice as Paid)
+
+  (View Audit Log)
+
+  User --> (Create Invoice)
+  User --> (Edit Invoice)
+  User --> (Delete Invoice)
+  User --> (View & Filter Invoice List)
+  User --> (View Invoice Details)
+  User --> (View Audit Log)
+
+  User --> (Save as Draft)
+  User --> (Save as Pending)
+  User --> (Mark Pending Invoice as Paid)
+}
+@enduml

@@ -1,0 +1,22 @@
+@startuml
+!define C4P https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master
+!includeurl C4P/C4_Container.puml
+!includeurl C4P/C4_Component.puml
+
+Container(nestBackend, "Backend - NestJS API", "NestJS", "REST API with Clean Architecture handling invoice operations")
+
+System_Boundary(c1, "Invoicing App [Backend]") {
+  Component(invoicesController, "InvoicesController", "REST Controller", "Handles HTTP requests for invoices")
+  Component(invoicesService, "InvoicesUsecases", "Service", "Business logic for invoice creation and status changes")
+  Component(invoiceRepo, "InvoiceRepository", "Repository", "DB access layer using TypeORM")
+  Component(invoiceEntity, "Entities", "Domain Entity", "Entity class of invoice, items and address")
+}
+
+nestBackend -> invoicesController
+invoicesController -> invoicesService
+invoicesService -> invoiceRepo
+invoiceRepo -> invoiceEntity
+
+@enduml
+
+

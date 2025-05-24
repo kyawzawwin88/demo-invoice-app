@@ -1,0 +1,54 @@
+@startuml
+
+class Invoice {
+  - id: string
+  - createdAt: Date
+  - paymentDue: Date
+  - description: string
+  - paymentTerms: uint
+  - clientName: string
+  - clientEmail: string
+  - senderAddress: Address
+  - clientAddress: Address
+  - total: decimal
+  - status: 'draft' | 'pending' | 'paid' | 'deleted'
+  --
+  +calculatePaymentDue(): Date
+  +calculateTotal(): decimal
+}
+
+class InvoiceItem {
+  - id: serial
+  - invoiceId: string
+  - name: string
+  - quantity: uint
+  - price: decimal
+  - total: decimal
+}
+
+class Address {
+  - id: serial
+  - street: string
+  - city: string
+  - postCode: string
+  - country: string
+}
+
+' Relationships
+Invoice "1" --> "0..*" InvoiceItem : contains
+Invoice "1" --> "0.1" Address : senderAddress
+Invoice "1" --> "0.1" Address : clientAddress
+
+class AuditLog {
+  - id: int
+  - invoiceId: string
+  - message: string
+  - actionType: 'created_draft' | 'created_pending' | 'updated' | 'mark_as_paid' | 'deleted'
+  - ipAddress: string
+  - userAgent: string
+  - actionAt: DateTime
+}
+
+Invoice "1" <-- "0..*" AuditLog : logs for
+
+@enduml

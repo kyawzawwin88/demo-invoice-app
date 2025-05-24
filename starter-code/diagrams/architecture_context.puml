@@ -1,0 +1,21 @@
+@startuml
+!define C4P https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master
+!includeurl C4P/C4_Container.puml
+!includeurl C4P/C4_Component.puml
+
+Person(user, "User", "Accounting user")
+
+System_Boundary(c1, "Invoicing App") {
+  Container(reactApp, "Frontend - React", "React + Tailwind + HeadlessUI", "Client-facing SPA using Atomic Design Pattern to manage invoices")
+  Container(nestBackend, "Backend - NestJS API", "NestJS", "REST API with Clean Architecture handling invoice operations")
+  Container(docker, "Production Container", "Docker (node:slim)", "Containerized deployment using Docker for frontend and backend")
+}
+ContainerDb(mysql, "MySQL Database", "MySQL", "Stores invoices, items, sender and client address")
+
+user -> reactApp : Uses via browser
+reactApp -> nestBackend : REST API (JSON)
+nestBackend -> mysql : Read/Write using TypeORM
+reactApp --> docker : Deployed via Docker
+nestBackend --> docker : Deployed via Docker
+
+@enduml

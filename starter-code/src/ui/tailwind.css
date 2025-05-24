@@ -1,0 +1,40 @@
+@import "tailwindcss";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-primary-default: #7C5DFA;
+  --color-primary-light: #9277FF;
+  --color-secondary: #888EB0;
+  --color-accent: #7E88C3;
+  --color-destructive: #EC5757;
+  --color-muted: #DFE3FA;
+  --color-surface-light: #F8F8FB;
+  --color-surface-dark: #1E2139;
+  --color-surface-darker: #252945;
+  --color-background-light: #F8F8FB;
+  --color-background-dark: #141625;
+  --color-text-light: #0C0E16;
+  --color-text-dark: #F8F8FB;
+  --color-status-paid: #33D6A0;
+  --color-status-paid-bg: rgba(51, 214, 160, 0.1);
+  --color-status-paid-indicator: #33D6A0;
+  --color-status-pending: #FF9500;
+  --color-status-pending-bg: rgba(255, 149, 0, 0.1);
+  --color-status-pending-indicator: #FF9500;
+  --color-status-draft: #888EB0;
+  --color-status-draft-bg: rgba(136, 142, 176, 0.1);
+  --color-status-draft-indicator: #888EB0;
+  --color-dialog-background: rgba(0, 0, 0, 0.5);
+}
+
+html,
+body {
+  @media (prefers-color-scheme: dark) {
+    color-scheme: dark;
+  }
+}
